@@ -1,0 +1,79 @@
+Shop.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Comparison Tool</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #333; }
+    label, input { display: block; margin: 8px 0; }
+    .product { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    .product h2 { margin: 0; }
+    .pros-cons { display: flex; gap: 20px; }
+    .pros-cons div { flex: 1; }
+    .link { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Product Comparison</h1>
+  <form id="searchForm">
+    <label>Product or Category:
+      <input type="text" id="product" required />
+    </label>
+    <label>Within how many miles?
+      <input type="number" id="miles" required />
+    </label>
+    <button type="submit">Compare</button>
+  </form>
+
+  <div id="results"></div>
+
+  <script>
+    const sampleData = [
+      {
+        name: "Sony WH-1000XM5 Headphones",
+        price: "$349.99",
+        stars: "★★★★☆",
+        pros: ["Excellent noise canceling", "Comfortable fit", "Great battery life"],
+        cons: ["Expensive", "No water resistance"],
+        description: "Industry-leading noise canceling wireless headphones with premium sound quality.",
+        link: "https://www.amazon.com/dp/B09XS7JWHH"
+      },
+      {
+        name: "Bose QuietComfort 45",
+        price: "$329.00",
+        stars: "★★★★☆",
+        pros: ["Clear sound", "Excellent comfort", "Strong noise cancelation"],
+        cons: ["Limited EQ customization", "Plastic build"],
+        description: "Comfortable and quiet headphones with up to 24 hours battery life.",
+        link: "https://www.bestbuy.com/site/bose-quietcomfort-45"
+      }
+    ];
+
+    document.getElementById("searchForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "<h2>Comparison Results</h2>";
+
+      sampleData.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.className = "product";
+        productDiv.innerHTML = `
+          <h2>${product.name}</h2>
+          <p><strong>Price:</strong> ${product.price}</p>
+          <p><strong>Rating:</strong> ${product.stars}</p>
+          <p>${product.description}</p>
+          <div class="pros-cons">
+            <div><strong>Pros:</strong><ul>${product.pros.map(p => `<li>${p}</li>`).join('')}</ul></div>
+            <div><strong>Cons:</strong><ul>${product.cons.map(c => `<li>${c}</li>`).join('')}</ul></div>
+          </div>
+          <p class="link"><a href="${product.link}" target="_blank">Buy Now</a></p>
+        `;
+        resultsDiv.appendChild(productDiv);
+      });
+    });
+  </script>
+</body>
+</html>

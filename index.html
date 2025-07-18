@@ -49,37 +49,73 @@ Shop.html
         cons: ["Limited EQ customization", "Plastic build"],
         description: "Comfortable and quiet headphones with up to 24 hours battery life.",
         link: "https://www.bestbuy.com/site/bose-quietcomfort-45"
+      },
+      {
+        name: "MacBook Air M2 2024",
+        price: "$1,099.00",
+        stars: "★★★★★",
+        pros: ["Lightweight", "Fast performance", "Great battery"],
+        cons: ["Few ports", "More expensive than M1"],
+        description: "Apple's M2 MacBook Air offers blazing speed in a compact package.",
+        link: "https://www.apple.com/macbook-air-m2"
+      },
+      {
+        name: "Dell XPS 13 Plus",
+        price: "$1,249.00",
+        stars: "★★★★☆",
+        pros: ["Gorgeous display", "Powerful Intel chip", "Great build quality"],
+        cons: ["No headphone jack", "Shallow keyboard"],
+        description: "Premium Windows laptop with edge-to-edge display and powerful performance.",
+        link: "https://www.dell.com/en-us/shop/xps-13-plus"
+      },
+      {
+        name: "Canon EOS R7 Camera",
+        price: "$1,499.00",
+        stars: "★★★★☆",
+        pros: ["Excellent autofocus", "Great image quality", "Weather-sealed"],
+        cons: ["Limited lens options", "No headphone jack"],
+        description: "APS-C mirrorless camera for enthusiasts and pros.",
+        link: "https://www.usa.canon.com/cameras/eos-r7"
+      },
+      {
+        name: "Nespresso Vertuo Plus Coffee Maker",
+        price: "$159.00",
+        stars: "★★★★☆",
+        pros: ["Easy to use", "Quick brew", "Sleek design"],
+        cons: ["Uses proprietary pods", "No milk frother included"],
+        description: "Delivers rich coffee and espresso with one-touch brewing.",
+        link: "https://www.nespresso.com/us/en/order/machines/vertuo/vertuo-plus"
       }
     ];
 
     document.getElementById("searchForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      const query = document.getElementById("product").value.toLowerCase();
       const resultsDiv = document.getElementById("results");
       resultsDiv.innerHTML = "<h2>Comparison Results</h2>";
 
-      const query = document.getElementById("product").value.toLowerCase();
-const filtered = sampleData.filter(p => p.name.toLowerCase().includes(query));
+      const filtered = sampleData.filter(p => p.name.toLowerCase().includes(query));
 
-if (filtered.length === 0) {
-  resultsDiv.innerHTML += `<p>No results found for "${query}". Try a different category.</p>`;
-}
+      if (filtered.length === 0) {
+        resultsDiv.innerHTML += `<p>No results found for "${query}". Try a different category.</p>`;
+      }
 
-filtered.forEach(product => {
-  const productDiv = document.createElement("div");
-  productDiv.className = "product";
-  productDiv.innerHTML = `
-    <h2>${product.name}</h2>
-    <p><strong>Price:</strong> ${product.price}</p>
-    <p><strong>Rating:</strong> ${product.stars}</p>
-    <p>${product.description}</p>
-    <div class="pros-cons">
-      <div><strong>Pros:</strong><ul>${product.pros.map(p => `<li>${p}</li>`).join('')}</ul></div>
-      <div><strong>Cons:</strong><ul>${product.cons.map(c => `<li>${c}</li>`).join('')}</ul></div>
-    </div>
-    <p class="link"><a href="${product.link}" target="_blank">Buy Now</a></p>
-  `;
-  resultsDiv.appendChild(productDiv);
-});
+      filtered.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.className = "product";
+        productDiv.innerHTML = `
+          <h2>${product.name}</h2>
+          <p><strong>Price:</strong> ${product.price}</p>
+          <p><strong>Rating:</strong> ${product.stars}</p>
+          <p>${product.description}</p>
+          <div class="pros-cons">
+            <div><strong>Pros:</strong><ul>${product.pros.map(p => `<li>${p}</li>`).join('')}</ul></div>
+            <div><strong>Cons:</strong><ul>${product.cons.map(c => `<li>${c}</li>`).join('')}</ul></div>
+          </div>
+          <p class="link"><a href="${product.link}" target="_blank">Buy Now</a></p>
+        `;
+        resultsDiv.appendChild(productDiv);
+      });
     });
   </script>
 </body>
